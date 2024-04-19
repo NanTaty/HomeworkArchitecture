@@ -25,7 +25,6 @@ public class PickSameColorObjective : Objective
             pickable.Pick();
             return true;
         }
-        Debug.Log(_ballColor);
         return false;
         
     }

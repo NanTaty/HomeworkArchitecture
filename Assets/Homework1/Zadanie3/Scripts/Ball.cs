@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour, IPickable
     [SerializeField] private BallColors _ballColor;
 
     public BallColors BallColor => _ballColor;
-    public Ball ThisBall => this;
+    public Ball PickableBall => this;
 
     public void Pick()
     {

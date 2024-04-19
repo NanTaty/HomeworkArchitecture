@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IPickable
 {
     BallColors BallColor { get; }
-    Ball ThisBall { get; }
+    Ball PickableBall { get; }
     void Pick();
 }

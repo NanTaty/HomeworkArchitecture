@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
         {
             if (_objective.AddBallColorToList(pickable, _balls))
             {
-                _balls.Add(pickable.ThisBall);
+                _balls.Add(pickable.PickableBall);
             }
             _objective.CheckForWin(_balls);
         }

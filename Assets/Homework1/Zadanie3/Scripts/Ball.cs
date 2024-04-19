@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IPickable
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private BallColors _ballColor;
+
+    public BallColors BallColor => _ballColor;
+    public Ball ThisBall => this;
+
+    public void Pick()
     {
-        if (other.TryGetComponent(out IBallPicker ballPicker))
-        {
-            ballPicker.PickBall(this);
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }

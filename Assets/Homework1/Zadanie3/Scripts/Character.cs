@@ -3,21 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour, IBallPicker
+public class Character : MonoBehaviour
 {
-    [SerializeField] private List<Ball> _balls;
+    private Objective _objective;
+    private BallColors _ballColor;
+    private List<Ball> _balls;
 
-    public event Action OnBallPicked;
-
-    private void Start()
+    private void Awake()
     {
         _balls = new List<Ball>();
     }
 
-    public List<Ball> Balls => _balls;
-    public void PickBall(Ball ball)
+    public void SetupObjective(Objective objective)
     {
-        _balls.Add(ball);
-        OnBallPicked?.Invoke();
+        _objective = objective;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out IPickable pickable))
+        {
+            if (_objective.AddBallColorToList(pickable, _balls))
+            {
+                _balls.Add(pickable.ThisBall);
+            }
+            _objective.CheckForWin(_balls);
+        }
     }
 }

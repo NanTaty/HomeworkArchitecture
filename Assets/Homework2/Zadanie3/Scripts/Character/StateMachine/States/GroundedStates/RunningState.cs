@@ -1,7 +1,5 @@
 namespace Zadanie3H2
 {
-    using UnityEngine.InputSystem;
-
     public class RunningState : GroundedState
     {
         private readonly RunningStateConfig _config;

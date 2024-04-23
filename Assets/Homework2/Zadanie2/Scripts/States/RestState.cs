@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Rest State Идентичен Work State по коду, но представим что у них разное поведение
 public class RestState : IState
 {
     private readonly IStateSwitcher _stateSwitcher;
@@ -33,5 +33,5 @@ public class RestState : IState
             _stateSwitcher.SwitchState<WorkMovementState>();
         }
     }
-    
+
 }

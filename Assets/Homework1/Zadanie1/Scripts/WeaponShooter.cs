@@ -3,25 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class WeaponShooter : MonoBehaviour
 {
-    private WeaponHandler _weaponHandler;
+    private WeaponSwitcher _weaponSwitcher;
 
     private void Awake()
     {
-        _weaponHandler = GetComponentInChildren<WeaponHandler>();
+        _weaponSwitcher = GetComponentInChildren<WeaponSwitcher>();
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _weaponHandler.CurrentWeapon.Shoot();
+            _weaponSwitcher.CurrentWeapon.Shoot();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            _weaponHandler.CurrentWeapon.Reload();
+            _weaponSwitcher.CurrentWeapon.Reload();
         }
     }
 }

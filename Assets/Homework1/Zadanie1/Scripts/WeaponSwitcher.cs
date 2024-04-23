@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponHandler : MonoBehaviour
+public class WeaponSwitcher : MonoBehaviour
 {
     [SerializeField] private List<Weapon> _weapons;
     private Weapon _currentWeapon;
@@ -44,13 +44,8 @@ public class WeaponHandler : MonoBehaviour
         if (_currentWeapon != null)
         {
             _currentWeapon.gameObject.SetActive(false);
-            _currentWeapon = _weapons[index];
-            _currentWeapon.gameObject.SetActive(true);
         }
-        else
-        {
-            _currentWeapon = _weapons[index];
-            _currentWeapon.gameObject.SetActive(true);
-        }
+        _currentWeapon = _weapons[index];
+        _currentWeapon.gameObject.SetActive(true);
     }
 }

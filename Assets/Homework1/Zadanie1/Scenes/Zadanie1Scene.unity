@@ -567,7 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons:
-  - {fileID: 1159603614}
+  - {fileID: 0}
   - {fileID: 670994979}
   - {fileID: 660022649}
   - {fileID: 1194550474}
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1159603612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a2cb22b9d67ef43bd0615d2c0097dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 163e46db97fad494da6e7217d7282da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 0}

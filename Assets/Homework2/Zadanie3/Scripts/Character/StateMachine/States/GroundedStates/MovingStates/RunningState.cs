@@ -1,12 +1,10 @@
 namespace Zadanie3H2
 {
-    public class RunningState : GroundedState
+    public class RunningState : MovingState
     {
-        private readonly RunningStateConfig _config;
-
         public RunningState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(
             stateSwitcher, data, character)
-            => _config = character.Config.RunningStateConfig;
+        {}
 
         public override void Enter()
         {
@@ -27,9 +25,7 @@ namespace Zadanie3H2
         public override void Update()
         {
             base.Update();
-
-            if (IsHorizontalInputZero())
-                StateSwitcher.SwitchState<IdlingState>();
+            
             if (IsRunPressed())
                 StateSwitcher.SwitchState<FastRunningState>();
             if (IsWalkPressed())

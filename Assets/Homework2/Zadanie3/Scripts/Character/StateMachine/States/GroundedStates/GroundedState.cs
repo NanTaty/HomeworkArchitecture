@@ -49,7 +49,5 @@ namespace Zadanie3H2
         }
 
         private void OnJumpKeyPressed(InputAction.CallbackContext obj) => StateSwitcher.SwitchState<JumpingState>();
-        protected bool IsRunPressed() => Input.Movement.Run.IsPressed();
-        protected bool IsWalkPressed() => Input.Movement.Walk.IsPressed();
     }
 }

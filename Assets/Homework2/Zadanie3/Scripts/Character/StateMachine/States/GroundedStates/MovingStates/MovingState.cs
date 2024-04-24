@@ -18,4 +18,6 @@ public class MovingState : GroundedState
         if (IsHorizontalInputZero())
             StateSwitcher.SwitchState<IdlingState>();
     }
+    protected bool IsRunPressed() => Input.Movement.Run.IsPressed();
+    protected bool IsWalkPressed() => Input.Movement.Walk.IsPressed();
 }

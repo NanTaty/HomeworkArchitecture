@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WorkerLocationData
 {
-    private Transform _workTransform;
-    private Transform _restTransform;
+    private IEnumerable<Vector3> _workPathPos;
+    private IEnumerable<Vector3> _restPathPos;
 
-    public WorkerLocationData(Transform workTransform, Transform restTransform)
+    public WorkerLocationData(IEnumerable<Vector3> workPathPos, IEnumerable<Vector3> restPathPos)
     {
-        _workTransform = workTransform;
-        _restTransform = restTransform;
+        _workPathPos = workPathPos;
+        _restPathPos = restPathPos;
     }
 
-    public Transform WorkTransform => _workTransform;
-    public Transform RestTransform => _restTransform;
+    public IEnumerable<Vector3> WorkPathPos => _workPathPos;
+    public IEnumerable<Vector3> RestPathPos => _restPathPos;
 }

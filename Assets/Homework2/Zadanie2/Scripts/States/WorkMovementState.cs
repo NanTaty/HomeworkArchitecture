@@ -11,8 +11,7 @@ public class WorkMovementState : MovementState
     public override void Enter()
     {
         base.Enter();
-        SetMovePosition(WorkerLocationData.WorkTransform);
-        CalculateMove();
+        SetMovePosition(WorkerLocationData.WorkPathPos);
         Debug.Log(GetType());
     }
 

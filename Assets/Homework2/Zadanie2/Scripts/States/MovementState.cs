@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class MovementState : IState
@@ -11,7 +12,9 @@ public abstract class MovementState : IState
     private Vector3 _movementPos;
     private Vector3 _moveDirection;
     private MovementStateConfig _config;
-    
+    private Queue<Vector3> _targets;
+    private Vector3 _currentTarget;
+
 
     public MovementState(IStateSwitcher stateSwitcher, NPCWorker npcWorker, WorkerLocationData workerLocationData)
     {
@@ -23,33 +26,38 @@ public abstract class MovementState : IState
 
     private float Speed => _config.MovementSpeed;
     
-    public virtual void Enter()
-    {
-        
-    }
+    public virtual void Enter() { }
 
-    public virtual void Exit()
-    {
-        
-    }
+    public virtual void Exit() { }
 
     public void Update()
     {
-        NpcWorker.transform.position += Speed * _moveDirection * Time.deltaTime;
-        if (Vector3.Distance(NpcWorker.transform.position, _movementPos) <= StoppingDistance)
+        Vector3 direction = _currentTarget - NpcWorker.transform.position;
+        NpcWorker.transform.position += Speed * direction.normalized * Time.deltaTime;
+
+        if (direction.magnitude <= StoppingDistance)
         {
-            SwitchState();
+            SwitchTarget();
         }
     }
 
-    protected void SetMovePosition(Transform position)
+    protected void SetMovePosition(IEnumerable<Vector3> targets)
     {
-        _movementPos = position.position;
+        _targets = new Queue<Vector3>(targets);
+        _currentTarget = _targets.Dequeue();
     }
-
-    protected void CalculateMove()
+    
+    private void SwitchTarget()
     {
-        _moveDirection = (_movementPos - NpcWorker.transform.position).normalized;
+        //_targets.Enqueue(_currentTarget);
+        if (_targets.Count != 0)
+        {
+            _currentTarget = _targets.Dequeue();
+        }
+        else
+        {
+            SwitchState();
+        }
     }
 
     protected abstract void SwitchState();

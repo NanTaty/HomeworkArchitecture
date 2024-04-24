@@ -11,8 +11,7 @@ public class RestMovementState : MovementState
     public override void Enter()
     {
         base.Enter();
-        SetMovePosition(WorkerLocationData.RestTransform);
-        CalculateMove();
+        SetMovePosition(WorkerLocationData.RestPathPos);
         Debug.Log(GetType());
     }
 

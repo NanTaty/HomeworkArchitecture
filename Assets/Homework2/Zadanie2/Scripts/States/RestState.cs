@@ -2,36 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //Rest State Идентичен Work State по коду, но представим что у них разное поведение
-public class RestState : IState
+public class RestState : ActionState
 {
-    private readonly IStateSwitcher _stateSwitcher;
-    private RestStateConfig _stateConfig;
-    private float _stateTimer;
-
-    public RestState(IStateSwitcher stateSwitcher, NPCWorker npcWorker)
+    public RestState(IStateSwitcher stateSwitcher, NPCWorker npcWorker) : base(stateSwitcher, npcWorker)
     {
-        _stateSwitcher = stateSwitcher;
-        _stateConfig = npcWorker.NpcWorkerConfig.RestStateConfig;
+    }
+
+    private float RestStateTimer => _stateConfig.RestStateConfig.RestStateTimer;
+    
+    public override void Enter()
+    {
+        base.Enter();
+        LaunchStateTimer(RestStateTimer);
+    }
+
+    protected override void StateTimer_OnTimerOver()
+    {
+        base.StateTimer_OnTimerOver();
+        _stateSwitcher.SwitchState<WorkMovementState>();
     }
     
-    public void Enter()
-    {
-        _stateTimer = _stateConfig.RestStateTimer;
-        Debug.Log(GetType());
-    }
-
-    public void Exit()
-    {
-        
-    }
-
-    public void Update()
-    {
-        _stateTimer -= Time.deltaTime;
-        if (_stateTimer <= 0)
-        {
-            _stateSwitcher.SwitchState<WorkMovementState>();
-        }
-    }
 
 }

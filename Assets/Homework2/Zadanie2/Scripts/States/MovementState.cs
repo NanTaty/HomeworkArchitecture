@@ -9,8 +9,6 @@ public abstract class MovementState : IState
     protected readonly IStateSwitcher StateSwitcher;
     protected readonly NPCWorker NpcWorker;
     protected readonly WorkerLocationData WorkerLocationData;
-    private Vector3 _movementPos;
-    private Vector3 _moveDirection;
     private MovementStateConfig _config;
     private Queue<Vector3> _targets;
     private Vector3 _currentTarget;
@@ -49,7 +47,6 @@ public abstract class MovementState : IState
     
     private void SwitchTarget()
     {
-        //_targets.Enqueue(_currentTarget);
         if (_targets.Count != 0)
         {
             _currentTarget = _targets.Dequeue();

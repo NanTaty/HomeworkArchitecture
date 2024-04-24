@@ -2,35 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkState : IState
+public class WorkState : ActionState
 {
-    private readonly IStateSwitcher _stateSwitcher;
-    private WorkStateConfig _stateConfig;
-    private float _stateTimer;
-
-    public WorkState(IStateSwitcher stateSwitcher, NPCWorker npcWorker)
+    public WorkState(IStateSwitcher stateSwitcher, NPCWorker npcWorker) : base(stateSwitcher, npcWorker)
     {
-        _stateSwitcher = stateSwitcher;
-        _stateConfig = npcWorker.NpcWorkerConfig.WorkStateConfig;
     }
 
-    public void Enter()
+    private float RestStateTimer => _stateConfig.WorkStateConfig.WorkStateTimer;
+    
+    public override void Enter()
     {
-        _stateTimer = _stateConfig.WorkStateTimer;
-        Debug.Log(GetType());
+        base.Enter();
+        LaunchStateTimer(RestStateTimer);
     }
 
-    public void Exit()
+    protected override void StateTimer_OnTimerOver()
     {
-        
-    }
-
-    public void Update()
-    {
-        _stateTimer -= Time.deltaTime;
-        if (_stateTimer <= 0)
-        {
-            _stateSwitcher.SwitchState<RestMovementState>();
-        }
+        base.StateTimer_OnTimerOver();
+        _stateSwitcher.SwitchState<RestMovementState>();
     }
 }

@@ -24,7 +24,12 @@ public class PlayerHealth : MonoBehaviour
         _healthMultiplier = healthMultiplier;
         OnPlayerHealthChanged?.Invoke(_playerHealth);
     }
-    
+
+    private void OnDestroy()
+    {
+        _playerLevel.OnPlayerLevelChanged -= PlayerLevel_OnPlayerLevelChanged;
+    }
+
     private void PlayerLevel_OnPlayerLevelChanged(int obj)
     {
         _maxHealth *= _healthMultiplier;

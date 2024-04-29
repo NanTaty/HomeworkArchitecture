@@ -16,7 +16,9 @@ public class Bootstrap : MonoBehaviour
         _gameplayMediator = new GameplayMediator(_playerHUD, player, _defeatPanel);
         _defeatPanel.Initialize(_gameplayMediator);
     }
-
+    
+    
+    //Просто для теста системы
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
